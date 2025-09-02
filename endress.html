@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Panorama - Endress</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, user-scalable=yes, maximum-scale=1.2">
+		<meta name="author" content="Vienna Ly - LTC BCIT">
+		
+		<!-- libs: jquery, three.js -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>	
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.min.js"></script>
+		
+		<!-- custom set up -->
+		<script src="scripts/pano_endress.js"></script>
+		
+		<style>
+			body{
+				background-color: #eee;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				line-height: 1.42857143;
+				color: #333;
+			}
+			#container{
+				margin-top:5%;
+			}
+			#info_window{
+				position: fixed;
+				right:0;
+				top:0;
+				width: 400px;
+				background-color: #fff;
+				padding: 0 .5em;
+			}
+			.handle{
+				float:left;
+				width: 100%;
+				height: 2em;
+				padding: 1em 0 .5em 0;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="container"></div>
+		<div id="info_window" >
+			
+			<div id="info"></div>
+			<video id="video" width="100%" height="auto" controls>
+				<source id="mp4_src" src="vids/ultrasonic.mp4" type="video/mp4">
+				
+				Your browser does not support the video tag.
+			</video>
+
+		</div>
+
+	</body>
+</html>

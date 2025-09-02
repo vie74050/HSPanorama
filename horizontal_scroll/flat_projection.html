@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>Flat Panorama viewer</title>
+		<meta name="description" content="Horizontal Image Slider">
+		<meta name="author" content="Vienna Ly">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<!-- jquery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+		<script src="scripts/imagesloaded.pkgd.min.js"></script>
+		<script src="scripts/flatpano.js"></script>
+		<link href="scripts/flatpano.css" rel="stylesheet">
+
+		<!-- custom pano parameters -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var pano1 = new FlatPano({
+					parent : "first",
+					looping : true
+				});
+				
+				var pano2 = new FlatPano({
+					parent : "second",
+					looping : false
+				});
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<p id="first">
+			<img src="images/Panorama1_SouthEast.jpg" alt="South East" />
+		</p>
+		<p id="second">
+			<img src="images/Panorama1_slice_02.jpg" alt="South East" />
+			<img src="images/Panorama1_slice_03.jpg" alt="South East" />
+			<img src="images/Panorama1_slice_04.jpg" alt="South East" />
+			<img src="images/Panorama1_slice_05.jpg" alt="South East" />
+		</p>
+		
+		
+	</body>
+</html>
+

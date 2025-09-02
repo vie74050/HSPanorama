@@ -1,0 +1,31 @@
+/**
+ * @author Vienna Ly
+ * COURSE: NSER 8500
+ * Date: Jan 1, 2015
+ * Description: display "comic strip" image panels, custom horizontal slide
+ * Require: images_horizontal-scroll.js -- see comments in js
+ */
+
+.pano.frame {
+	position: relative;
+	width: 500px;
+	max-width:100%;
+	height: 500px;
+	border: 1px solid #888;
+	overflow: hidden;
+	position: relative;
+	margin: 0 auto;
+	padding: 0px;
+	cursor: move;
+	pointer-events: none;
+}
+._imgHolder{
+	pointer-events: visible;
+}
+.pano img {
+	padding: 0px;
+	margin: 0px;
+	float:left;
+}
+
+footer{position:fixed; bottom:0}
