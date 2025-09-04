@@ -14,7 +14,7 @@
     "uglify-js": "^3.19.3"
   },
  "scripts": {
-  "build:js": "npx uglifyjs ./src/libs/jquery.min.js ./src/libs/jquery-ui.min.js ./src/libs/jquery.ui.touch-punch.min.js ./src/libs/three.min.js ./src/PanoWithClickObjs.js -o ./dist/app.min.js -c -m",
+  "build:js": "npx uglifyjs ./src/libs/three.min.js ./src/PanoWithClickObjs.js -o ./dist/app.min.js -c -m",
   "build:css": "npx cleancss ./src/default.css -o ./dist/styles.min.css",
   "build": "npm run build:js && npm run build:css"
 }
