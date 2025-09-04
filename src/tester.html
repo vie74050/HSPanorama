@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Panorama Inspire Demo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+				
+		<link rel="stylesheet" type="text/css" href="./default.css">
+		<script src="./libs/three.min.js" defer></script>
+		<script src="./PanoWithClickObjs.js" defer></script>
+
+		<script type="text/javascript">
+			
+			/*  Sample implementation*/
+			document.addEventListener('DOMContentLoaded', function () {
+				const panoImg = "../inspire/room1.jpg";
+				const panoSphere = true;
+				const panoFov = 60;
+				const pano = new PanoViewer("container", "info_window", "video");
+				const info_window = document.getElementById("info");
+
+				pano.Init(panoImg, panoSphere, panoFov);
+
+				// detect when info_window loses focus
+				info_window.addEventListener("blur", function() {
+					if (info_window.contentEditable === "true") {
+						SaveClickObj();
+					}
+				});
+
+				window.Move = function(axis, delta=0.5) {
+					pano.Move(axis, delta);
+				};
+				window.MoveAroundY = function(theta=0.5) {
+					pano.MoveAroundY(theta);
+				};
+				window.MoveCloser = function(delta=0.5) {
+					pano.MoveCloser(delta);
+				};
+				window.NewClickObj = function() {
+					
+					const defaultP = {
+						description: ""
+					}
+					pano.ClickObj(defaultP);
+					
+				};
+				window.DeleteClickObj = function() {
+					if (!confirm("Are you sure you want to delete this hotspot?")) {
+						return;
+					}
+					pano.DeleteClickObj();
+				};
+				window.SaveClickObj = function() {
+					const obj = pano.OBJECTS.filter(o => o.id === pano.SELECTED.id)[0];
+					const $info = document.getElementById('info');
+
+					obj.description = $info.innerHTML;
+					// make $info not contenteditable
+					$info.contentEditable = false;
+					$info.innerHTML = obj.description; console.log($info.innerHTML);
+
+					//console.log(pano.OBJECTS);
+				};
+				window.EditClickObj = function() {
+					const $info = document.getElementById('info');
+					$info.contentEditable = true;
+					$info.focus();
+				};
+				window.SaveAll = function() {
+					const objs = pano.OBJECTS.map(obj => {
+						
+						return {
+							id: obj.id,
+							description: obj.description,
+							pos: { x: obj.position.x, y: obj.position.y, z: obj.position.z },
+							type: obj.userData.type,
+							size: { x: obj.scale.x, y: obj.scale.y, z: obj.scale.z }
+						};
+					});
+
+					const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(objs, null, 2));
+					const fileName = prompt("Enter file name to save:", "objects.json");
+					if (fileName) {
+						const downloadAnchorNode = document.createElement('a');
+						downloadAnchorNode.setAttribute("href", dataStr);
+						downloadAnchorNode.setAttribute("download", fileName);
+						document.body.appendChild(downloadAnchorNode);
+						downloadAnchorNode.click();
+						downloadAnchorNode.remove();
+				 }
+				};
+				window.LoadSavedJSON = function() {
+					const input = document.createElement('input');
+					input.type = 'file';
+					input.accept = '.json,application/json';
+					
+					input.onchange = e => { 
+						const file = e.target.files[0]; 
+						const reader = new FileReader();
+						reader.onload = event => { 
+							const content = event.target.result;
+							try {
+								const objs = JSON.parse(content);
+								objs.forEach(ob => {
+									pano.ClickObj(ob);
+								});
+							} catch (err) {
+								alert("Error parsing JSON: " + err.message);
+							}
+						};
+						reader.readAsText(file);
+					};
+					
+					input.click();
+					
+				};
+				
+			});
+
+		</script>
+			
+	</head>
+	<body>
+		<div id="editor">	
+			<button class="btn btn-small" value='add' onclick="NewClickObj()" title="Add a click spot">&#9675; ADD</button>
+			<button class="btn btn-small" value='saveall' onclick="SaveAll()" title="Download click spots data">&#128229; DOWNLOAD</button>
+			<button class="btn btn-small" value='load' onclick="LoadSavedJSON()" title="Load saved data">&#128194; LOAD</button>
+			
+		</div>
+		<div id="container"></div>
+		<div id="info_window">			
+			<div class="handle"></div>
+			<div id="info" placeholder="placeholder text"></div>
+						
+			<div id="btns" class="well">
+				<h5>Position and Editing Tools</h5>
+				
+				<button class="btn btn-small" value='movey' onclick="Move('y',-0.5)">
+					&#8595; <!-- Down arrow symbol -->
+				</button>
+				<button class="btn btn-small" value='movey' onclick="Move('y', 0.5)">
+					&#8593; <!-- Up arrow symbol -->
+				</button>
+
+				<button class="btn btn-small" value='rotate' onclick="MoveAroundY(-0.5)">
+					&#8592; <!-- Left arrow symbol -->
+				</button>
+				<button class="btn btn-small" value='rotate' onclick="MoveAroundY(0.5)">
+					&#8594; <!-- Right arrow symbol -->
+				</button>
+
+				<button class="btn btn-small" value='rotate' onclick="MoveCloser(0.5)">In</button>
+				<button class="btn btn-small" value='rotate' onclick="MoveCloser(-0.5)">Out</button>
+				
+				<button class="btn btn-small" value='load' onclick="EditClickObj()" title="Edit description">&#9998; </button>
+
+				|
+
+				<button class="btn btn-small" value='delete' onclick="DeleteClickObj()" title="Delete Object">&#10060;</button>
+
+			</div>
+		</div>
+	
+	</body>
+</html>

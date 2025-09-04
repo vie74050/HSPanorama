@@ -5,7 +5,7 @@
  */
 
 /**
- * PanoViewer is a 3D panorama viewer using THREE.js, supporting interactive Hotspot objects that display content in info window.
+ * PanoViewer is a 3D panorama viewer using THREE.js, supporting interactive Hotspots (ClickObj) that display content in info window.
  *
  * @class
  * @param {string} containerId - The DOM element ID for the panorama container.
@@ -379,9 +379,23 @@ class PanoViewer {
 		this.RENDERER.render(this.SCENE, this.CAMERA);
 	}
 
-	/** */
 	ClickObj(p) {
 		let geometry, material, obj;
+		
+		if (p.pos == null) {
+			// if not p.pos provided, a generic position is created at a point 10 units in front of the camera
+			const pos = this.CAMERA.position.clone().add(this.CAMERA.getWorldDirection(new THREE.Vector3()).multiplyScalar(10));
+			p.pos = { x: pos.x, y: pos.y, z: pos.z };
+		}
+
+		if (p.size == null) {
+			p.size = { x: 1, y: 1, z: 1 };
+		}
+
+		if (p.type == null) {
+			p.type = "circle";
+		}
+
 		switch (p.type) {
 			case "texture":
 				const side1 = new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.1, transparent: true, wireframe: true }),
@@ -404,7 +418,7 @@ class PanoViewer {
 				break;
 			case "circle":
 				const radius = p.size.x;
-				const borderWidth = p.borderWidth || 0.5;
+				const borderWidth = p.borderWidth || 0.1;
 				const fillGeometry = new THREE.CircleGeometry(radius, 32);
 				const fillMaterial = new THREE.MeshBasicMaterial({
 					color: p.fillColor || 0xffffff,
@@ -428,7 +442,7 @@ class PanoViewer {
 			default:
 				return;
 		}
-
+		
 		obj.userData.type = p.type;
 		obj.userData.selectable = true;
 		obj.userData.id = p.id;
@@ -463,8 +477,8 @@ class PanoViewer {
 		if (this.SELECTED.userData.type === "texture") {
 			this.SELECTED.material.materials[4].opacity = 1;
 		}
-		// console log position
-		console.log("Position:", this.SELECTED.position);
+	
+		//console.log("Position:", this.SELECTED.position);
 	}
 
 	MoveTo(x, y, z, theta) {
@@ -490,7 +504,7 @@ class PanoViewer {
 
 		// Make the object face the center horizontally
 		this.SELECTED.lookAt(new THREE.Vector3(0, this.SELECTED.position.y, 0));
-		console.log("Position:", this.SELECTED.position);
+		//console.log("Position:", this.SELECTED.position);
 	}
 
 	MoveCloser(amt) {
@@ -498,7 +512,7 @@ class PanoViewer {
 		this.SELECTED.getWorldDirection(direction);
 		direction.multiplyScalar(amt);
 		this.SELECTED.position.add(direction);
-		console.log("Position:", this.SELECTED.position);
+		//console.log("Position:", this.SELECTED.position);
 	}
 	
 	Opacity(val) {
@@ -506,7 +520,15 @@ class PanoViewer {
 			this.SELECTED.material.materials[4].opacity = val;
 		}
 	}
-
+	DeleteClickObj() {
+		if (this.SELECTED) {
+			this.SCENE.remove(this.SELECTED);
+			this.OBJECTS = this.OBJECTS.filter(obj => obj !== this.SELECTED);
+			this.SELECTED = null;
+		}
+		this.Reset();
+		this.infoWindow.style.display = "none";
+	}
 	Reset() {
 		this.OBJECTS.forEach(obj => {
 			if (obj.userData.type === "circle") {

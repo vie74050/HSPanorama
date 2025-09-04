@@ -72,6 +72,20 @@ a {
 	padding: 0.5em;
 	
 }
+#info[contenteditable="true"] {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 0.5em;
+}
+#info[contenteditable][placeholder]:empty::before {
+	content: attr(placeholder); /* Retrieves text from the 'placeholder' attribute */
+	color: #999; /* Adjust color as needed */
+	/* Add other styling for the placeholder text, e.g., font-style, opacity */
+}
+
+#info[contenteditable][placeholder]:empty:focus::before {
+	content: ""; /* Hides the placeholder when the element is focused */
+}
 .handle {
 	width: 100%;
 	height: 2em;
