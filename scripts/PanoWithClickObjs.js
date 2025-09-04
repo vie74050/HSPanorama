@@ -121,8 +121,9 @@ function onDocumentMouseDown( event ) {
 
 		// check if is a grouped object (i.e. circle)
 		const parent = SELECTED.parent;
-		SELECTED = parent;
+		
 		if (parent && parent.userData.type === "circle") {
+			SELECTED = parent;
 			parent.children[0].material.color.setHex(0xff0000); // Highlight first child (border)
 			parent.children[0].material.opacity = 0.5; // increase opacity
 		} else {
@@ -135,7 +136,7 @@ function onDocumentMouseDown( event ) {
 		container.style.cursor = 'help';
 		isUserInteracting = false;
 		
-		var pos = { x: event.clientX, y: event.clientY }; console.log(pos, SELECTED);
+		var pos = { x: event.clientX, y: event.clientY }; //console.log(pos, SELECTED);
 		
 		$info_window.fadeIn();
 		$("#info").html(SELECTED.description);
@@ -378,12 +379,12 @@ function Move(axis, amt){
 			break;
 		
 	}
-	console.log("new pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z );	
+	console.log("x:" + newPos.x + ", y:" + newPos.y + ", z:" + newPos.z );	
 
 	SELECTED.position.set(newPos.x, newPos.y, newPos.z);
 	SELECTED.lookAt(new THREE.Vector3( 0, newPos.y, 0 ));
 
-	if (SELECTED.type === "texture") {
+	if (SELECTED.userData.type === "texture") {
 			
 		SELECTED.material.materials[4].opacity = 1;	
 	}
@@ -400,8 +401,8 @@ function MoveTo(x,y,z, theta) {
 }
 
 function Opacity(val) {
-
-	if (SELECTED.type === "texture") {
+	console.log(SELECTED);
+	if (SELECTED.userData.type === "texture") {
 		SELECTED.material.materials[4].opacity = val;
 	}
 }
