@@ -26,21 +26,20 @@ var clickobjs = [
 	}
 ];
 
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
 	// initial view
 	lon = 10, lat = -10;	
 	fov_init = 80;
 	init("room1.jpg", true);
-				
-	$.each(clickobjs, function(i, ob){
+
+	clickobjs.forEach(function(ob) {
 		ClickObj(ob);
 	});
 
 	// prevent copy or saving of image from right-click menu
-	$('canvas').on('contextmenu', function(e) {
-		e.preventDefault();
+	document.querySelectorAll('canvas').forEach(function(canvas) {
+		canvas.addEventListener('contextmenu', function(e) {
+			e.preventDefault();
+		});
 	});
-
-
-
 });

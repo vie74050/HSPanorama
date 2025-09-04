@@ -560,11 +560,11 @@
 			
 	];
 
-	$(document).ready(function() {
+	document.addEventListener("DOMContentLoaded", function() {
 		lon = 90;
 		init("SOE_endress.jpg", false);
-		
-		$.each(clickobjs, function(i, ob){
+
+		clickobjs.forEach(function(ob) {
 			ClickObj(ob);
 		});
 	});

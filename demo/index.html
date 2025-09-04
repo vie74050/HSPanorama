@@ -5,22 +5,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-		<!-- bootstrap -->
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
-		<link href="../scripts/default.css" rel="stylesheet" type="text/css"/>
-
-		<!-- jquery -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-						
-		<!-- three libs --> 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js" type="text/javascript"></script>
-		
-		<script src="../scripts/PanoWithClickObjs.js"></script>
+		<link rel="stylesheet" type="text/css" href="../dist/styles.min.css">
+		<script src="../dist/app.min.js" defer></script>
 
 		<script type="text/javascript">
-			/* type p {
+			
+			/*  Sample implementation:
+				Type p {
 				id: string,
 				name: string,
 				description: string,
@@ -34,32 +25,33 @@
 				vid?: string
 			}
 			*/
-			$(document).ready(function() {
-				var clickobjs = [
-				{
-					id: "0", name: "point 1",
-					description: "A mannequin is an often articulated doll used by artists, tailors, dressmakers, windowdressers and others especially to display or fit clothing. ",
-					pos: {x: 10, y:-1, z:0},
-					size: {x: 1, y:.3, z:0.1}, 
+			document.addEventListener('DOMContentLoaded', function () {
+				const clickobjs = [
+					{
+					id: "0",
+					name: "point 1",
+					description: "A mannequin is an often articulated doll used by artists, tailors, dressmakers, windowdressers and others especially to display or fit clothing.",
+					pos: { x: 10, y: -1, z: 0 },
+					size: { x: 1, y: 0.3, z: 0.1 },
 					type: "texture",
-					url: "mannequin.png" // texture type requires url to image src
-				},
-				{
-					description:  "Video Example",
-					pos: {x:8, y:-1, z:-3.5},
-					size: {x: 1, y:1, z:1}, 
+					url: "mannequin.png"
+					},
+					{
+					description: "Video Example",
+					pos: { x: 8, y: -1, z: -3.5 },
+					size: { x: 1, y: 1, z: 1 },
 					borderWidth: 0.1,
 					type: "circle",
 					vid: "../endress/ultrasonic"
-				},
-			];
+					}
+				];
 
-			init("demo.jpg", true);
+				init("demo.jpg", true);
 
-			$.each(clickobjs, function(i, ob){
-				ClickObj(ob);
+				clickobjs.forEach(ob => {
+					ClickObj(ob);
 				});
-			});
+				});
 
 		</script>
 

@@ -1,7 +1,7 @@
 /*
  * Vienna Ly
- * Dec 8, 2015
- * 360 spherical panorama using jquery and three.js
+ * Update Sep 3 2025
+ * 360 panorama using jquery and three.js
  */
 
 var mat, panoSize, ratio_wh, $info_window;
@@ -207,10 +207,10 @@ function onDocumentMouseUp( event ) {
 function onDocumentMouseWheel( event ) {
 	var boundsMin = 20, boundsMax = fov_max;
 	// WebKit
-
+console.log("fov:", fov);
 	if ( event.wheelDeltaY ) {
 
-		fov -= event.wheelDeltaY * 0.01;
+		fov -= event.wheelDeltaY * 0.01; 
 
 	// Opera / Explorer 9
 

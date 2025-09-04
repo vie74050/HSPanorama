@@ -1,0 +1,21 @@
+{
+  "name": "hs-panorama",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HS Panorama",
+  "main": "dist/main.js",
+  "engines": {
+    "npm": ">=8.6.0",
+    "node": ">=24.4.1"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "concat-cli": "^4.0.0",
+    "uglify-js": "^3.19.3"
+  },
+ "scripts": {
+  "build:js": "npx uglifyjs ./src/libs/jquery.min.js ./src/libs/jquery-ui.min.js ./src/libs/jquery.ui.touch-punch.min.js ./src/libs/three.min.js ./src/PanoWithClickObjs.js -o ./dist/app.min.js -c -m",
+  "build:css": "npx cleancss ./src/default.css -o ./dist/styles.min.css",
+  "build": "npm run build:js && npm run build:css"
+}
+}
