@@ -10,27 +10,12 @@
 
 		<script type="text/javascript">
 			
-			/*  Sample implementation:
-				Type p {
-				id: string,
-				name: string,
-				description: string,
-				pos: {x: number, y: number, z: number},
-				size: {x: number, y: number, z: number},
-				type: "texture" | "sphere" | "circle",
-				borderWidth?: number, // circle only,
-				borderColor?: string, // hex colour, circle only
-				fillColor?: string, // hex color
-				url?: string,
-				vid?: string
-			}
-			*/
+			/*  Sample implementation*/
 			document.addEventListener('DOMContentLoaded', function () {
 				const clickobjs = [
 					{
-					id: "0",
 					name: "point 1",
-					description: "A mannequin is an often articulated doll used by artists, tailors, dressmakers, windowdressers and others especially to display or fit clothing.",
+					description: "Where is the best place to position this mannequin?",
 					pos: { x: 10, y: -1, z: 0 },
 					size: { x: 1, y: 0.3, z: 0.1 },
 					type: "texture",
@@ -45,13 +30,30 @@
 					vid: "../endress/ultrasonic"
 					}
 				];
-
-				init("demo.jpg", true);
+				const pano = new PanoViewer("container", "info_window", "video");
+				pano.Init("demo.jpg", true, 60);
 
 				clickobjs.forEach(ob => {
-					ClickObj(ob);
+					pano.ClickObj(ob);
 				});
-				});
+				
+				window.Move = function(axis, delta) {
+					pano.Move(axis, delta);
+				};
+				window.MoveTo = function(x, y, z, theta, val="") {
+					pano.MoveTo(x, y, z, theta);
+					document.getElementById('feedback').innerHTML = val;
+				};
+				window.MoveAroundY = function(theta) {
+					pano.MoveAroundY(theta);
+				};
+				window.MoveCloser = function(delta) {
+					pano.MoveCloser(delta);
+				};
+				window.Opacity = function(op) {
+					pano.Opacity(op);
+				};
+			});
 
 		</script>
 
@@ -66,31 +68,42 @@
 			<!-- buttons: optional for testing and positioning objects. 
 			 Remove or set class="hidden" to hide-->
 			<div id="btns" class="well">
-				<h5>Move</h5>
-				<button class="btn btn-small" value='movex' onclick="Move('x', 1)">-x</button>
-				<button class="btn btn-small" value='movex' onclick="Move('x', -1)">+x</button>
-				<button class="btn btn-small" value='movey' onclick="Move('y', 0.5)">+y</button>
-				<button class="btn btn-small" value='movey' onclick="Move('y', -0.5)">-y</button>
-				<button class="btn btn-small" value='movez' onclick="Move('z', -1)">-z</button>
-				<button class="btn btn-small" value='movez' onclick="Move('z', 1)">+z</button>
+				<h5>Move Selected Object</h5>
+				
+				<button class="btn btn-small" value='movey' onclick="Move('y', -1)">
+					&#8595; <!-- Down arrow symbol -->
+				</button>
+				<button class="btn btn-small" value='movey' onclick="Move('y', 1)">
+					&#8593; <!-- Up arrow symbol -->
+				</button>
+
+				<button class="btn btn-small" value='rotate' onclick="MoveAroundY(-1)">
+					&#8592; <!-- Left arrow symbol -->
+				</button></button>
+				<button class="btn btn-small" value='rotate' onclick="MoveAroundY(1)">
+					&#8594; <!-- Right arrow symbol -->
+				</button>
+
+				<button class="btn btn-small" value='rotate' onclick="MoveCloser(1)">In</button>
+				<button class="btn btn-small" value='rotate' onclick="MoveCloser(-1)">Out</button>
 		
 				<h5>Preset Positions</h5>
 				<!-- Examples how to position objects dynamically -->
 				<button 
 					class="btn btn-small" 
-					onclick="MoveTo(-1.5,-1,5, 101); $('#feedback').html($(this).val()); " 
+					onclick="MoveTo(-1.5,-1,5,101, this.value)" 
 					value='Correct, the mannequin belongs here.' >Location A</button>
 				<button 
 					class="btn btn-small" 
-					onclick="MoveTo(6,-1,1, 368); $('#feedback').html($(this).val()); " 
+					onclick="MoveTo(6,-1,1, 368, this.value)" 
 					value='Wrong, the mannequin blocks traffic flow here' >Location B</button>
 				<button 
 					class="btn btn-small" 
-					onclick="MoveTo(4,-1,-9.5, 290); $('#feedback').html($(this).val()); " 
+					onclick="MoveTo(4,-1,-9.5, 290, this.value)" 
 					value='This is ok too, I guess.' >Location C</button>
 				<button 
 					class="btn btn-small" 
-					onclick="Opacity(0.1); $('#feedback').html($(this).val()); " 
+					onclick="Opacity(0.1)" 
 					value='Wrong. Why hide it?' >Hide</button>
 
 			</div>

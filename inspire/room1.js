@@ -27,15 +27,27 @@ var clickobjs = [
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
+	const pano = new PanoViewer("container", "info_window", "video");
+	
 	// initial view
-	lon = 10, lat = -10;	
-	fov_init = 80;
-	init("room1.jpg", true);
+	pano.lon = 10, pano.lat = -10;	
+	pano.fov_init = 80;
+	pano.Init("room1.jpg", true);
 
 	clickobjs.forEach(function(ob) {
-		ClickObj(ob);
+		pano.ClickObj(ob);
 	});
 
+	// expose methods for events
+	window.Move = function(axis, delta) {
+		pano.Move(axis, delta);
+	};
+	window.MoveAroundY = function(theta) {
+		pano.MoveAroundY(theta);
+	};
+	window.MoveCloser = function(delta) {
+		pano.MoveCloser(delta);
+	};
 	// prevent copy or saving of image from right-click menu
 	document.querySelectorAll('canvas').forEach(function(canvas) {
 		canvas.addEventListener('contextmenu', function(e) {

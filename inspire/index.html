@@ -16,23 +16,32 @@
 		<div id="info_window">
 			<div class="handle">	</div>
 			<div id="info"></div>
-			<video id="video" width="100%" height="auto" controls>
+			<video id="video" width="100%" height="auto" controls controlsList="nodownload">
 				<source id="mp4_src" src="vids/sp.mp4" type="video/mp4">
-				
 				Your browser does not support the video tag.
 			</video>
-			<div id="btns" class="hidden">
-				<h5>Move</h5>
-				<button class="btn btn-small" value='movex' onclick="Move('x', 5)">-x</button>
-				<button class="btn btn-small" value='movex' onclick="Move('x', -5)">+x</button>
-				<button class="btn btn-small" value='movey' onclick="Move('y', -5)">-y</button>
-				<button class="btn btn-small" value='movey' onclick="Move('y', 5)">+y</button>
-				<button class="btn btn-small" value='movez' onclick="Move('z', -5)">-z</button>
-				<button class="btn btn-small" value='movez' onclick="Move('z', 5)">+z</button>						
+			<!-- Helper buttons for positioning clickObjs. Remove or set class="hidden" when done.-->
+			<div id="btns" class="well">
+				<h5>Move Selected Object</h5>
+				
+				<button class="btn btn-small" value='movey' onclick="Move('y', -5)">
+					&#8595; <!-- Down arrow symbol -->
+				</button>
+				<button class="btn btn-small" value='movey' onclick="Move('y', 5)">
+					&#8593; <!-- Up arrow symbol -->
+				</button>
+
+				<button class="btn btn-small" value='rotate' onclick="MoveAroundY(-5)">
+					&#8592; <!-- Left arrow symbol -->
+				</button></button>
+				<button class="btn btn-small" value='rotate' onclick="MoveAroundY(5)">
+					&#8594; <!-- Right arrow symbol -->
+				</button>
+
+				<button class="btn btn-small" value='rotate' onclick="MoveCloser(5)">In</button>
+				<button class="btn btn-small" value='rotate' onclick="MoveCloser(-5)">Out</button>
 			</div>
 		</div>
-		
-		
-		
+	
 	</body>
 </html>

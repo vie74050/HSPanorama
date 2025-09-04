@@ -561,10 +561,11 @@
 	];
 
 	document.addEventListener("DOMContentLoaded", function() {
-		lon = 90;
-		init("SOE_endress.jpg", false);
+		const pano = new PanoViewer("container", "info_window", "video");
+		pano.lon = 90;
+		pano.Init("SOE_endress.jpg", false);
 
 		clickobjs.forEach(function(ob) {
-			ClickObj(ob);
+			pano.ClickObj(ob);
 		});
 	});
