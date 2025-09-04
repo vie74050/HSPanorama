@@ -14,13 +14,15 @@ var clickobjs = [
 		description: "Assessor",
 		pos: {x: 65, y:0, z:42.5},
 		size: {x: 10, y:10, z:10}, 
-		type: "circle"
+		type: "circle",
+		vid: "vids/assessor"
 	},
 	{
 		description: "Standardized patient",
 		pos: {x: -12.5, y:-2.5, z:-67.5},
 		size: {x: 10, y:10, z:10}, 
-		type: "circle"
+		type: "circle",
+		vid: "vids/sp"
 	}
 ];
 
