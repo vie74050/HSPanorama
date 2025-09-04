@@ -296,7 +296,13 @@ function ClickObj(p) {
 				obj = new THREE.Mesh( geometry, material );
 			break;
 		case "sphere":
-			material = new THREE.MeshBasicMaterial( { color: 0xffffff, ambient: 0xffffff, overdraw: false, transparent: true, opacity: 0.4} );
+			material = new THREE.MeshBasicMaterial( { 
+				color: p.fillColor || 0xffffff, 
+				ambient: 0xffffff, 
+				overdraw: false, 
+				transparent: true, 
+				opacity: 0.4
+			} );
 			geometry = new THREE.SphereGeometry(p.size.x, 20, 20);
 			obj = new THREE.Mesh( geometry, material );
 			break;

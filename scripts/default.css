@@ -80,3 +80,8 @@ a {
 	user-select: none;
 	box-shadow: 0 -0 25px rgba(50, 50, 50, 0.8)
 }
+
+h3 {
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
+}

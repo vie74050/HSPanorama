@@ -20,7 +20,20 @@
 		<script src="../scripts/PanoWithClickObjs.js"></script>
 
 		<script type="text/javascript">
-			
+			/* type p {
+				id: string,
+				name: string,
+				description: string,
+				pos: {x: number, y: number, z: number},
+				size: {x: number, y: number, z: number},
+				type: "texture" | "sphere" | "circle",
+				borderWidth?: number, // circle only,
+				borderColor?: string, // hex colour, circle only
+				fillColor?: string, // hex color
+				url?: string,
+				vid?: string
+			}
+			*/
 			$(document).ready(function() {
 				var clickobjs = [
 				{
@@ -55,8 +68,11 @@
 
 		<div id="container"></div>
 		<div id="info_window">
-			<div class="handle">	</div>
-			<div id="info"></div>
+			<div class="handle"><!-- The drag handle --></div>
+			<div id="info"><!-- The info content where description will be displayed --></div>
+			<div id="feedback" class="alert alert-info"><!-- Feedback for answers --></div>
+			<!-- buttons: optional for testing and positioning objects. 
+			 Remove or set class="hidden" to hide-->
 			<div id="btns" class="well">
 				<h5>Move</h5>
 				<button class="btn btn-small" value='movex' onclick="Move('x', 1)">-x</button>
@@ -67,12 +83,24 @@
 				<button class="btn btn-small" value='movez' onclick="Move('z', 1)">+z</button>
 		
 				<h5>Preset Positions</h5>
-				
-				<button class="btn btn-small" onclick="MoveTo(-1.5,-1,5, 101); " value='Correct, the mannequin belongs here.' >Location A</button>
-				<button class="btn btn-small" onclick="MoveTo(6,-1,1, 368); " value='Wrong, the mannequin blocks traffic flow here' >Location B</button>
-				<button class="btn btn-small" onclick="MoveTo(4,-1,-9.5, 290); " value='This is ok too, I guess.' >Location C</button>
-				<button class="btn btn-small" onclick="Opacity(0.1); " value='Wrong. Why hide it?' >Hide</button>
-				
+				<!-- Examples how to position objects dynamically -->
+				<button 
+					class="btn btn-small" 
+					onclick="MoveTo(-1.5,-1,5, 101); $('#feedback').html($(this).val()); " 
+					value='Correct, the mannequin belongs here.' >Location A</button>
+				<button 
+					class="btn btn-small" 
+					onclick="MoveTo(6,-1,1, 368); $('#feedback').html($(this).val()); " 
+					value='Wrong, the mannequin blocks traffic flow here' >Location B</button>
+				<button 
+					class="btn btn-small" 
+					onclick="MoveTo(4,-1,-9.5, 290); $('#feedback').html($(this).val()); " 
+					value='This is ok too, I guess.' >Location C</button>
+				<button 
+					class="btn btn-small" 
+					onclick="Opacity(0.1); $('#feedback').html($(this).val()); " 
+					value='Wrong. Why hide it?' >Hide</button>
+
 			</div>
 			
 		</div>
