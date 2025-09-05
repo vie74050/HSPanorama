@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Panorama Inspire Demo</title>
+		<title>Panorama Editor Tester</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 				
@@ -139,30 +139,29 @@
 				Your browser does not support the video tag.
 			</video>			
 			<div id="btns" class="well">
-				<h5>Position and Editing Tools</h5>
+				<h5>Editing Tools</h5>
+				<div class="flex-row">
+					<button class="btn btn-small" value='movey' onclick="Move('y',-0.5)" title="Move Down">
+						&#8595; <!-- Down arrow symbol -->
+					</button>
+					<button class="btn btn-small" value='movey' onclick="Move('y', 0.5)" title="Move Up">
+						&#8593; <!-- Up arrow symbol -->
+					</button>
+
+					<button class="btn btn-small" value='rotate' onclick="MoveAroundY(-0.5)" title="Move Left">
+						&#8592; <!-- Left arrow symbol -->
+					</button>
+					<button class="btn btn-small" value='rotate' onclick="MoveAroundY(0.5)" title="Move Right">
+						&#8594; <!-- Right arrow symbol -->
+					</button>
+
+					<button class="btn btn-small" value='rotate' onclick="MoveCloser(0.5)" title="Larger">&#11044;</button>
+					<button class="btn btn-small" value='rotate' onclick="MoveCloser(-0.5)" title="Smaller">&#x2022;</button>
+					|
+					<button class="btn btn-primary btn-lg" value='load' onclick="EditClickObj()" title="Edit description">&#9998; </button>
+					<button class="btn btn-danger btn-lg" value='delete' onclick="DeleteClickObj()" title="Delete Object">&#128465;</button>
+				</div>
 				
-				<button class="btn btn-small" value='movey' onclick="Move('y',-0.5)">
-					&#8595; <!-- Down arrow symbol -->
-				</button>
-				<button class="btn btn-small" value='movey' onclick="Move('y', 0.5)">
-					&#8593; <!-- Up arrow symbol -->
-				</button>
-
-				<button class="btn btn-small" value='rotate' onclick="MoveAroundY(-0.5)">
-					&#8592; <!-- Left arrow symbol -->
-				</button>
-				<button class="btn btn-small" value='rotate' onclick="MoveAroundY(0.5)">
-					&#8594; <!-- Right arrow symbol -->
-				</button>
-
-				<button class="btn btn-small" value='rotate' onclick="MoveCloser(0.5)">In</button>
-				<button class="btn btn-small" value='rotate' onclick="MoveCloser(-0.5)">Out</button>
-				
-				<button class="btn btn-small" value='load' onclick="EditClickObj()" title="Edit description">&#9998; </button>
-
-				|
-
-				<button class="btn btn-small" value='delete' onclick="DeleteClickObj()" title="Delete Object">&#10060;</button>
 
 			</div>
 		</div>

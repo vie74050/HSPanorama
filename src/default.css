@@ -102,3 +102,14 @@ h3 {
 	font-size: 1.5em;
 	margin-bottom: 0.5em;
 }
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5em;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.btn-lg {
+	font-size: 24px;
+}
