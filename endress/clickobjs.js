@@ -23,7 +23,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "ultrasonic"
+			vid: "ultrasonic.mp4"
 		},
 		{
 			description:  A1,
@@ -31,7 +31,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "ultrasonic"
+			vid: "ultrasonic.mp4"
 		},
 		
 		{
@@ -40,7 +40,7 @@
 			size: {x: .8, y:.6, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "ultrasonic"
+			vid: "ultrasonic.mp4"
 		},
 		
 		{
@@ -49,7 +49,7 @@
 			size: {x: 0.7, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "coriolis"
+			vid: "coriolis.mp4"
 		
 		},
 		{
@@ -58,7 +58,7 @@
 			size: {x: 0.7, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "coriolis"
+			vid: "coriolis.mp4"
 		
 		},
 		
@@ -68,7 +68,7 @@
 			size: {x: 0.6, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "dpflow"
+			vid: "dpflow.mp4"
 		
 		},
 		{
@@ -77,7 +77,7 @@
 			size: {x: 0.6, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "dpflow"
+			vid: "dpflow.mp4"
 		
 		},
 		
@@ -87,7 +87,7 @@
 			size: {x: 0.6, y:0.6, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "vortex"
+			vid: "vortex.mp4"
 		
 		},
 		{
@@ -96,7 +96,7 @@
 			size: {x: 0.6, y:0.6, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "vortex"	
+			vid: "vortex.mp4"	
 		},
 		
 		{
@@ -113,7 +113,7 @@
 			size: {x: 1, y: 1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "magflow"	
+			vid: "magflow.mp4"	
 		},
 		{
 			description: H,
@@ -121,7 +121,7 @@
 			size: {x: 1.1, y: 1.1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "magflow"
+			vid: "magflow.mp4"
 		},
 		{
 			description: H,
@@ -129,7 +129,7 @@
 			size: {x: 1.1, y: 1.1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "magflow"
+			vid: "magflow.mp4"
 		},
 		{
 			description: H,
@@ -137,7 +137,7 @@
 			size: {x: 1, y: 1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "magflow"
+			vid: "magflow.mp4"
 		},
 	
 		
@@ -209,7 +209,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "ultrasonic"
+			vid: "ultrasonic.mp4"
 		},
 		{
 			
@@ -218,7 +218,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "ultrasonic"
+			vid: "ultrasonic.mp4"
 		},
 		
 		{
@@ -228,7 +228,7 @@
 			size: {x: 0.6, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "ultrasonic"
+			vid: "ultrasonic.mp4"
 		
 		},
 		
@@ -238,7 +238,7 @@
 			size: {x: 0.6, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "coriolis"
+			vid: "coriolis.mp4"
 		
 		},
 		{
@@ -247,7 +247,7 @@
 			size: {x: 0.6, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "coriolis"
+			vid: "coriolis.mp4"
 		
 		},
 		
@@ -257,7 +257,7 @@
 			size: {x: 0.6, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "dpflow"
+			vid: "dpflow.mp4"
 		
 		},
 		{
@@ -266,7 +266,7 @@
 			size: {x: 0.6, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "dpflow"
+			vid: "dpflow.mp4"
 		
 		},
 		
@@ -276,7 +276,7 @@
 			size: {x: 0.6, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "vortex"
+			vid: "vortex.mp4"
 		
 		},
 		{
@@ -285,7 +285,7 @@
 			size: {x: 0.6, y:0.3, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "vortex"	
+			vid: "vortex.mp4"	
 		},
 		
 		{
@@ -294,7 +294,7 @@
 			size: {x: 1, y: 1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "magflow"	
+			vid: "magflow.mp4"	
 		},
 		{
 			description: H,
@@ -302,7 +302,7 @@
 			size: {x: 1, y: 1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "magflow"
+			vid: "magflow.mp4"
 		},
 		{
 			description: H,
@@ -310,7 +310,7 @@
 			size: {x: 1, y: 1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "magflow"
+			vid: "magflow.mp4"
 		},
 		
 		{
@@ -385,7 +385,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "ultrasonic"
+			vid: "ultrasonic.mp4"
 		},
 		{
 			description:  A1,
@@ -393,7 +393,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "ultrasonic"
+			vid: "ultrasonic.mp4"
 		},
 		{
 			description:  A2,
@@ -401,7 +401,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "ultrasonic"
+			vid: "ultrasonic.mp4"
 		},
 		
 		{
@@ -410,7 +410,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "dpflow",
+			vid: "dpflow.mp4",
 		},
 		
 		{
@@ -419,7 +419,7 @@
 			size: {x: .8, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "coriolis"
+			vid: "coriolis.mp4"
 		},
 		
 		{
@@ -428,7 +428,7 @@
 			size: {x: .8, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "coriolis"
+			vid: "coriolis.mp4"
 		},
 		
 		{
@@ -437,7 +437,7 @@
 			size: {x: .7, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "dpflow"
+			vid: "dpflow.mp4"
 		},
 		{
 			description: D,
@@ -445,7 +445,7 @@
 			size: {x: .7, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "dpflow"
+			vid: "dpflow.mp4"
 		},
 		
 		{
@@ -454,7 +454,7 @@
 			size: {x: .7, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "vortex"
+			vid: "vortex.mp4"
 		},
 		{
 			description: E,
@@ -462,7 +462,7 @@
 			size: {x: .8, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "vortex"
+			vid: "vortex.mp4"
 		},
 		
 		{
@@ -491,7 +491,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "magflow"
+			vid: "magflow.mp4"
 		},
 		{
 			
@@ -500,7 +500,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "magflow"
+			vid: "magflow.mp4"
 		},
 		{
 			
@@ -509,7 +509,7 @@
 			size: {x: 1, y:1, z:1}, 
 			borderWidth: 0.1,
 			type: "circle",
-			vid: "magflow"
+			vid: "magflow.mp4"
 		},
 		
 		{

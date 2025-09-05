@@ -17,7 +17,7 @@
  * @property {string} [id] - Unique identifier for the object.
  * @property {string} [name] - Name of the object.
  * @property {string} [description] - Description to show in the info window (string, html)
- * @property {string} [vid] - Video URL (without extension) of mp4 to play when selected. 
+ * @property {string} [vid] - Video URL of mp4 to play when selected. 
  * @property {string} [url] - Texture image URL (for type "texture").
  * @property {Object} pos - Position of the object in 3D space.
  * @property {number} pos.x - X coordinate.
@@ -101,14 +101,18 @@ class PanoViewer {
 		if (bool_sphere) {
 			mesh = new THREE.Mesh(
 				new THREE.SphereGeometry(100, 50, 50),
-				new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture(this.mat) })
 			);
 		} else {
 			mesh = new THREE.Mesh(
 				new THREE.CylinderGeometry(400, 400, 500, 50, 1, true),
-				new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture(this.mat) })
 			);
 		}
+		const texloader = new THREE.TextureLoader();
+		texloader.setCrossOrigin("anonymous");
+		texloader.load(this.mat, (texture) => {
+			mesh.material = new THREE.MeshBasicMaterial({ map: texture });
+		});
+
 		mesh.scale.z = -1;
 		this.SCENE.add(mesh);
 
@@ -289,7 +293,7 @@ class PanoViewer {
 				if (this.SELECTED.vid) {
 					this.video.style.display = "block";
 					const source = this.video.querySelector("source");
-					source.setAttribute("src", this.SELECTED.vid + ".mp4");
+					source.setAttribute("src", this.SELECTED.vid );
 					this.video.load();
 				} else {
 					this.video.style.display = "none";
@@ -398,11 +402,15 @@ class PanoViewer {
 
 		switch (p.type) {
 			case "texture":
-				const side1 = new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.1, transparent: true, wireframe: true }),
-					front = new THREE.MeshLambertMaterial({ color: 0xffffff, map: THREE.ImageUtils.loadTexture(p.url), transparent: true }),
-					materials = [side1, side1, side1, side1, front, side1];
-				material = new THREE.MeshFaceMaterial(materials);
-				geometry = new THREE.CubeGeometry(1.5, 5, 1, 4, 4, 1);
+				const texloader = new THREE.TextureLoader();
+				texloader.setCrossOrigin("anonymous");
+				texloader.load(p.url, (texture) => {
+					const side1 = new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.1, transparent: true, wireframe: true }),
+						front = new THREE.MeshLambertMaterial({ color: 0xffffff, map: texture, transparent: true }),
+						materials = [side1, side1, side1, side1, front, side1];
+					material = new THREE.MeshFaceMaterial(materials);
+					geometry = new THREE.CubeGeometry(1.5, 5, 1, 4, 4, 1);
+				});
 				obj = new THREE.Mesh(geometry, material);
 				break;
 			case "sphere":

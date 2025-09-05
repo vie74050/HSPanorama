@@ -8,7 +8,7 @@
  */
 
 // define hotspots
-
+let host = "https://bcit-ltc.github.io/Inspire-Articulate360/story_content/";
 var clickobjs2 = [
     {
         "id": 8,
@@ -24,7 +24,7 @@ var clickobjs2 = [
             "y": 1,
             "z": 1
         },
-        "vid": "vids/assessor"
+        "vid": host + "video_6JsQcUCdgPO_22_48_960x540.mp4"
     },
     {
         "id": 11,
@@ -40,7 +40,7 @@ var clickobjs2 = [
             "y": 1,
             "z": 1
         },
-        "vid": "vids/sp"
+        "vid": host + "video_5Yjeab7nB1m_22_48_960x540.mp4"
     },
     {
         "id": 14,
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	// initial view
 	pano.lon = 10, pano.lat = -10;	
 	pano.fov_init = 80;
-	pano.Init("room1.jpg", true);
+	pano.Init(host + "5kAzXWsVisZ_full.jpg" , true);
 
 	clickobjs2.forEach(function(ob) {
 		pano.ClickObj(ob);

@@ -10,15 +10,17 @@
 		<script src="./PanoWithClickObjs.js" defer></script>
 
 		<script type="text/javascript">
+			let host = "https://bcit-ltc.github.io/Inspire-Articulate360/story_content/";
 			
 			/*  Sample implementation*/
 			document.addEventListener('DOMContentLoaded', function () {
-				const panoImg = "../inspire/room1.jpg";
+				const panoImg = host + "5kAzXWsVisZ_full.jpg";
 				const panoSphere = true;
 				const panoFov = 60;
 				const pano = new PanoViewer("container", "info_window", "video");
 				const info_window = document.getElementById("info");
 
+				pano.lon = 10, pano.lat = -10; pano.fov_init = 80;
 				pano.Init(panoImg, panoSphere, panoFov);
 
 				// detect when info_window loses focus
@@ -132,7 +134,10 @@
 		<div id="info_window">			
 			<div class="handle"></div>
 			<div id="info" placeholder="placeholder text"></div>
-						
+			<video id="video" width="100%" height="auto" controls controlsList="nodownload">
+				<source id="mp4_src" src="" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>			
 			<div id="btns" class="well">
 				<h5>Position and Editing Tools</h5>
 				
