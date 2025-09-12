@@ -45,7 +45,7 @@ class PanoViewer {
 		this.container = document.getElementById(containerId);
 		this.infoWindow = document.getElementById(infoWindowId);
 		this.video = document.getElementById(videoId);
-		this.mat = null;
+		this.panomesh = null;
 		this.panoSize = { w: 0, h: 0 };
 		this.ratio_wh = 1;
 		this.fov = 60;		// the current field of view
@@ -74,7 +74,7 @@ class PanoViewer {
 
 	Init(s_material, bool_sphere = true, fov_init = 60) {
 		this.infoWindow.style.display = "none";
-		this.mat = s_material || "demo/demo.jpg";
+		
 		this.panoSize = {
 			w: this.container.offsetWidth,
 			h: this.container.offsetHeight
@@ -97,24 +97,9 @@ class PanoViewer {
 		this.SCENE.add(new THREE.AmbientLight(0x222222));
 
 		// background pano
-		let mesh;
-		if (bool_sphere) {
-			mesh = new THREE.Mesh(
-				new THREE.SphereGeometry(100, 50, 50),
-			);
-		} else {
-			mesh = new THREE.Mesh(
-				new THREE.CylinderGeometry(400, 400, 500, 50, 1, true),
-			);
-		}
-		const texloader = new THREE.TextureLoader();
-		texloader.setCrossOrigin("anonymous");
-		texloader.load(this.mat, (texture) => {
-			mesh.material = new THREE.MeshBasicMaterial({ map: texture });
-		});
-
-		mesh.scale.z = -1;
-		this.SCENE.add(mesh);
+		let mat = s_material || "demo/demo.jpg";
+		this.SetPanoMaterial(mat, bool_sphere);
+		this.SCENE.add(this.panomesh);
 
 		this.PROJECTOR = new THREE.Projector();
 
@@ -383,6 +368,39 @@ class PanoViewer {
 		this.RENDERER.render(this.SCENE, this.CAMERA);
 	}
 
+	SetPanoMaterial(s_mat, bool_sphere = true) {
+		
+		let mesh;
+		if (bool_sphere) {
+			mesh = new THREE.Mesh(
+				new THREE.SphereGeometry(100, 50, 50)
+			);
+		} else {
+			mesh = new THREE.Mesh(
+				new THREE.CylinderGeometry(400, 400, 500, 50, 1, true)
+			);
+		}
+		const texloader = new THREE.TextureLoader();
+		texloader.setCrossOrigin("anonymous");
+		texloader.load(s_mat, (texture) => {
+			mesh.material = new THREE.MeshBasicMaterial({ map: texture });
+		});
+
+		mesh.scale.z = -1;
+		
+		this.panomesh = mesh;
+		// update scene pano mesh rendering
+		if (this.SCENE) {
+			const existing = this.SCENE.getObjectByName("panomesh");
+			if (existing) {
+				this.SCENE.remove(existing);
+			}
+			this.panomesh.name = "panomesh";
+			this.SCENE.add(this.panomesh);
+		}
+		
+	}
+
 	ClickObj(p) {
 		let geometry, material, obj;
 		
@@ -451,9 +469,7 @@ class PanoViewer {
 				return;
 		}
 		
-		obj.userData.type = p.type;
-		obj.userData.selectable = true;
-		obj.userData.id = p.id;
+		obj.userData = p;
 		obj.overdraw = true;
 		obj.position.set(p.pos.x, p.pos.y, p.pos.z);
 		obj.name = p.name;
@@ -465,6 +481,7 @@ class PanoViewer {
 
 		this.OBJECTS.push(obj);
 		this.SCENE.add(obj);
+		return obj;
 	}
 
 	Move(axis, amt) {

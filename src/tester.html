@@ -10,11 +10,12 @@
 		<script src="./PanoWithClickObjs.js" defer></script>
 
 		<script type="text/javascript">
-			let host = "https://bcit-ltc.github.io/Inspire-Articulate360/story_content/";
-			
+			const host = "./demo/";//"https://bcit-ltc.github.io/Inspire-Articulate360/story_content/";
+			const panoImg = host + "demo.jpg";"5kAzXWsVisZ_full.jpg";
+
 			/*  Sample implementation*/
 			document.addEventListener('DOMContentLoaded', function () {
-				const panoImg = host + "5kAzXWsVisZ_full.jpg";
+				
 				const panoSphere = true;
 				const panoFov = 60;
 				const pano = new PanoViewer("container", "info_window", "video");
@@ -42,10 +43,11 @@
 				window.NewClickObj = function() {
 					
 					const defaultP = {
-						description: ""
+						description: "enter text here"
 					}
-					pano.ClickObj(defaultP);
-					
+					const NewClickObj = pano.ClickObj(defaultP);
+					NewClickObj.children[0].material.color.setHex(0x00ff00); // green for new object
+					NewClickObj.children[0].material.opacity = 1;
 				};
 				window.DeleteClickObj = function() {
 					if (!confirm("Are you sure you want to delete this hotspot?")) {
@@ -70,6 +72,10 @@
 					$info.focus();
 				};
 				window.SaveAll = function() {
+					if (pano.OBJECTS.length === 0) {
+						alert("No hotspots to save.");
+						return;
+					}
 					const objs = pano.OBJECTS.map(obj => {
 						
 						return {
@@ -117,7 +123,23 @@
 					input.click();
 					
 				};
-				
+				window.LoadImageFromFile = function(bool_sphere = true) {
+					const input = document.createElement('input');
+					input.type = 'file';
+					input.accept = 'image/*';
+					
+					input.onchange = e => { 
+						const file = e.target.files[0]; 
+						const userImageURL = URL.createObjectURL(file);
+						pano.SetPanoMaterial(userImageURL, bool_sphere);
+						// revoke the object URL after image is loaded
+						setTimeout(() => {
+							URL.revokeObjectURL(userImageURL);
+						}, 1000);
+					};
+					
+					input.click();
+				};
 			});
 
 		</script>
@@ -125,9 +147,18 @@
 	</head>
 	<body>
 		<div id="editor">	
-			<button class="btn btn-small" value='add' onclick="NewClickObj()" title="Add a click spot">&#9675; ADD</button>
+			<button class="btn btn-small" value='help' onclick="alert('Instructions:\n1. Load an 360 image for the background.\n2. Click and drag to move the panorama.\n3. Click ADD to add a new circle hotspot at the center of screen.\n4. Click on a hotspot to select it.\n  - Use the editing tools to adjust position and size. \n  - Click &#9998; EDIT  to modify the description. Click outside the text area to save.\n  - Click &#128465; DELETE to remove the selected hotspot. \n \n* Use DOWNLOAD to save all hotspots data as a JSON file.\n* Use LOAD to load hotspots data from a JSON file.')" title="Help">&#10067; HELP</button>
+			|
+			&#128247;
+			<select class="btn btn-small" onchange="if(this.value==='sphere'){LoadImageFromFile(true);}else if(this.value==='cylinder'){LoadImageFromFile(false);} this.selectedIndex=0;">
+				<option selected disabled>Load Pano Image</option>
+				<option value="sphere">Spherical</option>
+				<option value="cylinder">Cylindrical</option>
+			</select>
+			<button class="btn btn-small" value='add' onclick="NewClickObj()" title="Add a click spot at the center of the screen">&#9675; ADD</button>
 			<button class="btn btn-small" value='saveall' onclick="SaveAll()" title="Download click spots data">&#128229; DOWNLOAD</button>
 			<button class="btn btn-small" value='load' onclick="LoadSavedJSON()" title="Load saved data">&#128194; LOAD</button>
+			<button class="btn btn-small" value='reset' onclick="if(confirm('All data will be lost. Are you sure you want to reset?')) location.reload()" title="Reset the panorama">&#10227; RESET</button>
 			
 		</div>
 		<div id="container"></div>
@@ -158,7 +189,7 @@
 					<button class="btn btn-small" value='rotate' onclick="MoveCloser(0.5)" title="Larger">&#11044;</button>
 					<button class="btn btn-small" value='rotate' onclick="MoveCloser(-0.5)" title="Smaller">&#x2022;</button>
 					|
-					<button class="btn btn-primary btn-lg" value='load' onclick="EditClickObj()" title="Edit description">&#9998; </button>
+					<button class="btn btn-primary btn-lg" value='edit' onclick="EditClickObj()" title="Edit description">&#9998; </button>
 					<button class="btn btn-danger btn-lg" value='delete' onclick="DeleteClickObj()" title="Delete Object">&#128465;</button>
 				</div>
 				
