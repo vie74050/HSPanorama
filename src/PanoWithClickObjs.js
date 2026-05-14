@@ -310,7 +310,7 @@ class PanoViewer {
 		this.PROJECTOR.unprojectVector(vector, this.CAMERA);
 
 		const ray = new THREE.Raycaster(this.CAMERA.position, vector.sub(this.CAMERA.position).normalize());
-		const intersects = ray.intersectObjects(this.OBJECTS);
+		const intersects = ray.intersectObjects(this.OBJECTS, true);
 
 		this.container.style.cursor = intersects.length > 0 ? 'help' : 'default';
 	}
