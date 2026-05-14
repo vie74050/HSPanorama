@@ -45,9 +45,9 @@
 					const defaultP = {
 						description: "enter text here"
 					}
-					const NewClickObj = pano.ClickObj(defaultP);
-					NewClickObj.children[0].material.color.setHex(0x00ff00); // green for new object
-					NewClickObj.children[0].material.opacity = 1;
+					const newClickObj = pano.ClickObj(defaultP);
+					newClickObj.children[0].material.color.setHex(0x00ff00); // green for new object
+					newClickObj.children[0].material.opacity = 1;
 				};
 				window.DeleteClickObj = function() {
 					if (!confirm("Are you sure you want to delete this hotspot?")) {
@@ -111,7 +111,10 @@
 							try {
 								const objs = JSON.parse(content);
 								objs.forEach(ob => {
-									pano.ClickObj(ob);
+									const newClickObj = pano.ClickObj(ob);
+									newClickObj.children[0].material.color.setHex(0x00ff00); // green for new object
+									newClickObj.children[0].material.opacity = 1;
+
 								});
 							} catch (err) {
 								alert("Error parsing JSON: " + err.message);
